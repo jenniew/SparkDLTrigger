@@ -1,6 +1,6 @@
 # SparkDLTrigger
 
-The goal of this work is to reproduce the results of this paper [https://arxiv.org/abs/1807.00083]
+The goal of this work is to reproduce the results of this paper [https://arxiv.org/abs/1807.00083](https://arxiv.org/abs/1807.00083)
 using tools from the Big Data ecosystem.    
 Principal author: Matteo Migliorini  
 Contacts: Luca.Canali@cern.ch; Matteo.Migliorini@cern.ch; Riccardo.Castellotti@cern.ch  
@@ -33,6 +33,7 @@ The resutls of the DL model(s) training are satisfactoy and match the resutls of
 ![Loss converging, ROC and AUC](Docs/Loss_ROC_AUC.png)
 
 ### Additional info
-- [Poster at the CERN openlab technical meeting](Docs/Poster.pdf)  
+- [Blog post "Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo"](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl)
+- [Poster at the CERN openlab technical workshop 2019](Docs/Poster.pdf)  
   
   
