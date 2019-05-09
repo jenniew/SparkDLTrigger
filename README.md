@@ -13,7 +13,7 @@ Event data flows collected from the particle detector (CMS experiment) contains 
 of event topologies of interest. 
 A particle classifier built with neural networks can be used as event filter,
 improving state of the art in accuracy.
-![Physics use case for the particle classifier](Docs/Physics use case.png)
+![Physics use case for the particle classifier](Docs/Physics_use_case.png)
   
   
 ### Data pipeline
