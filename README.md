@@ -12,7 +12,8 @@ Intel for BigDL and Analytics Zoo consultancy: Jiao Wang and Sajan Govindan
 Event data flows collected from the particle detector (CMS experiment) contains different types
 of event topologies of interest. 
 A particle classifier built with neural networks can be used as event filter,
-improving state of the art in accuracy.
+improving state of the art in accuracy.  
+
 ![Physics use case for the particle classifier](Docs/Physics_use_case.png)
   
   
@@ -35,5 +36,5 @@ The resutls of the DL model(s) training are satisfactoy and match the resutls of
 ### Additional info
 - [Blog post "Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo"](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl)
 - [Poster at the CERN openlab technical workshop 2019](Docs/Poster.pdf)  
-  
+- [Presentation at Spark Summit SF 2019](https://databricks.com/session/deep-learning-on-apache-spark-at-cerns-large-hadron-collider-with-intel-technologies)  
   
