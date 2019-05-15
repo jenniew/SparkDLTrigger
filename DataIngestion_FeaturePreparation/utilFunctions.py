@@ -92,8 +92,31 @@ def PhotonPtMapp(DR, event):
         if h.ET<= 1.0: continue
         pTmap.append([h.Eta, h.Phi, h.ET])
     return np.asarray(pTmap)
+"""
+Functions used to return the Pt map of selected tracks, neutrals and photons
+Versions used for the optimized filtering with Spark SQL and HOF
+"""
+# get the selected tracks
+def ChPtMapp2(Tracks):
+    #pTmap = []
+    pTmap = np.zeros((len(Tracks), 3))
+    for i, h in enumerate(Tracks):
+        pTmap[i] = [h["Eta"], h["Phi"], h["PT"]]
+    return pTmap
 
+# get the selected neutrals
+def NeuPtMapp2(NeutralHadrons):
+    pTmap = np.zeros((len(NeutralHadrons), 3))
+    for i, h in enumerate(NeutralHadrons):
+        pTmap[i] = [h["Eta"], h["Phi"], h["ET"]]
+    return pTmap
 
+# get the selected photons
+def PhotonPtMapp2(Photons):
+    pTmap = np.zeros((len(Photons), 3))
+    for i, h in enumerate(Photons):
+        pTmap[i] = [h["Eta"], h["Phi"], h["ET"]]
+    return pTmap
 """
 Get the particle ISO
 """
