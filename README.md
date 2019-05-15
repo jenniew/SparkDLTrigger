@@ -1,11 +1,10 @@
 # SparkDLTrigger
 
-The goal of this work is to reproduce the results of this paper [https://arxiv.org/abs/1807.00083](https://arxiv.org/abs/1807.00083)
-using tools from the Big Data ecosystem.    
-Principal author: Matteo Migliorini  
+This repository contains the code and notebooks accompanying the blog article [Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl).  
+Principal author of the notebooks: Matteo.Migliorini@cern.ch  
 Contacts: Luca.Canali@cern.ch; Matteo.Migliorini@cern.ch; Riccardo.Castellotti@cern.ch  
 Acknowledgements: Viktor Khristenko, Maria Girone, Maurizio Pierini, Thong Nhuyen, Members of the Hadoop and Spark service at CERN  
-Intel for BigDL and Analytics Zoo consultancy: Jiao Wang and Sajan Govindan  
+Intel for BigDL and Analytics Zoo consultancy: Jiao (Jennie) Wang and Sajan Govindan  
 
   
 ### Physics use case
@@ -13,6 +12,8 @@ Event data flows collected from the particle detector (CMS experiment) contains 
 of event topologies of interest. 
 A particle classifier built with neural networks can be used as event filter,
 improving state of the art in accuracy.  
+This work reproduces the findings of the paper [Topology classification with deep learning to improve real-time event selection at the LHC](https://arxiv.org/abs/1807.00083)
+using tools from the Big Data ecosystem, notably Apache Spark and BigDL/Analytics Zoo.
 
 ![Physics use case for the particle classifier](Docs/Physics_use_case.png)
   
