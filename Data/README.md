@@ -6,4 +6,5 @@ If you have access to CERN computing resources, you can contact the Hadoop and S
 
 - [testUndersampled_2kevents.parquet](testUndersampled_2kevents.parquet) Contains a sample of the events/features files, after filtering and feature engineering 
 - [rawData_sample](rawData_sample) Contains a sample of the raw data, one file per event topology type
-
+- [trainUndersampled_HLF_features](trainUndersampled_HLF_features) High Level Features and lebels, training dataset
+- [testUndersampled_HLF_features](testUndersampled_HLF_features) High Level Features and lebels, test dataset
