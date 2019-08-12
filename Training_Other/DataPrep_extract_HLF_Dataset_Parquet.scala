@@ -26,10 +26,13 @@ root
  |-- HLF_input: vector (nullable = true)
  |-- encoded_label: vector (nullable = true)
 
-// save the test dataset
-// compact output in 1 file with coalesce(1)
-// use a Parquet block size of 1MB, this forces row groups to 1MB and is motivated by
-// later use of Petastorm make_batch_reader to determine the batch size to feed to Tensorflow
+// Save the test dataset
+// Compact output in 1 file with coalesce(1)
+// Additional (optional) tuning is to set the Parquet block size of 1MB, this forces row groups to 1MB. 
+// This action is motivated by the use of Petastorm. 
+// Petastorm uses Parquet block size in  make_batch_reader to determine the batch size to feed to Tensorflow.
+// If you don't need to use Petastorm, you can skip the setting option("parquet.block.size", 1024 * 1024) and use defaults
+//
 df.selectExpr("toArray(HLF_input) as HLF_input", "toArray(encoded_label) as encoded_label").
   coalesce(1).
   write.  
