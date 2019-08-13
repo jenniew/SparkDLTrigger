@@ -1,14 +1,14 @@
 //
-// Converts the High Lelvel feature classifier training and test datasets to TFRecord format
-// - Reads Parquet data as a dataframe
+// Converts the High Level feature classifier training and test datasets to TFRecord format
+// - Reads Parquet data into a dataframe
 // - Save the dataframe as TFRecords using spark-tensorflow-connector
 // (see https://github.com/tensorflow/ecosystem/tree/master/spark/spark-tensorflow-connector)
 // This is used as input for the TensorFlow Keras with TFRecord example notebook
 // Run with Scala shell or in a Scala notebook
 
-// Commnad line used to run this (June 2019):
+// Commnad line used to run this (June 2019, updated Aug 2019):
 
-bin/spark-shell --master local[*] --packages org.tensorflow:spark-tensorflow-connector_2.11:1.13.1
+bin/spark-shell --master local[*] --packages org.tensorflow:spark-tensorflow-connector_2.11:1.14.0
 
 // Data source
 
