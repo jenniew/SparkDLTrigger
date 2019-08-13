@@ -44,7 +44,7 @@ root
 // restoring the Array to its original shape will be handled in TensorFlow using tf.data and tf.io
 //
 df.coalesce(numPartitions).
-selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input)", "toArray(encoded_label) as encoded_label")
+selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input) as GRU_input", "toArray(encoded_label) as encoded_label")
 .write.format("tfrecords")
 .save(outputPath+"testUndersampled.tfrecords")
 
@@ -59,7 +59,7 @@ val df2=spark.read.parquet(PATH + "trainUndersampled.parquet")
 // compact output in numPartitions files with coalesce(numPartitions)
 //
 df.coalesce(numPartitions).
-selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input)", "toArray(encoded_label) as encoded_label")
+selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input) as GRU_input", "toArray(encoded_label) as encoded_label")
 .write.format("tfrecords")
 .save(outputPath+"trainUndersampled.tfrecord")
 
