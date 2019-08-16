@@ -46,7 +46,7 @@ root
 df.coalesce(numPartitions).
 selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input) as GRU_input", "toArray(encoded_label) as encoded_label")
 .write.format("tfrecords")
-.save(outputPath+"testUndersampled.tfrecords")
+.save(outputPath+"testUndersampled.tfrecord")
 
 //
 // Repeat for the training dataset
@@ -58,7 +58,7 @@ val df2=spark.read.parquet(PATH + "trainUndersampled.parquet")
 // save the training dataset in TFRecord format
 // compact output in numPartitions files with coalesce(numPartitions)
 //
-df.coalesce(numPartitions).
+df2.coalesce(numPartitions).
 selectExpr("toArray(HLF_input) as HLF_input", "flatten(GRU_input) as GRU_input", "toArray(encoded_label) as encoded_label")
 .write.format("tfrecords")
 .save(outputPath+"trainUndersampled.tfrecord")
