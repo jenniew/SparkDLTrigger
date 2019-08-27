@@ -2,8 +2,8 @@
 # This Python code is the core of the distributed training with 
 # tf.keras with tf.distribute for the Inclusive Classifier model
 # 
-# tested with tf 2.0.0-beta1
-######
+# tested with tf 2.0.0-rc0
+#########
 
 ########################
 ## Configuration
@@ -20,10 +20,10 @@ model_output_path="./"         # output dir for saving the trained model
 
 # tunables
 batch_size = 128 * number_workers
-test_batch_size = 1024
+test_batch_size = 10240
 
 # tunable
-num_epochs = 1
+num_epochs = 12
 
 ## End of configuration
 ########################
@@ -74,9 +74,9 @@ with strategy.scope():
     model.compile(loss=loss, optimizer=optimizer, metrics=["accuracy"] )
 
 # test dataset 
-files_test_dataset = tf.data.Dataset.list_files(PATH + "testUndersampled.tfrecord/part-r*")
+files_test_dataset = tf.data.Dataset.list_files(PATH + "testUndersampled.tfrecord/part-r*", shuffle=False)
 # training dataset 
-files_train_dataset = tf.data.Dataset.list_files(PATH + "trainUndersampled.tfrecord/part-r*")
+files_train_dataset = tf.data.Dataset.list_files(PATH + "trainUndersampled.tfrecord/part-r*", seed=4242)
 
 # tunable
 num_parallel_reads=16
@@ -129,9 +129,14 @@ history = model.fit(train, steps_per_epoch=steps_per_epoch, \
                     epochs=num_epochs, callbacks=callbacks, verbose=1)
 
 model_full_path=model_output_path + "mymodel" + str(worker_number) + ".h5"
-print("Training finished, now saving the model to: " + model_full_path)
+print("Training finished, now saving the model in h5 format to: " + model_full_path)
 
 model.save(model_full_path, save_format="h5")
+
+# TensorFlow 2.0
+model_full_path=model_output_path + "mymodel" + str(worker_number) + ".tf"
+print("..saving the model in tf format (TF 2.0) to: " + model_full_path)
+tf.keras.models.save_model(model, PATH+"mymodel" + ".tf", save_format='tf')
 
 exit
 

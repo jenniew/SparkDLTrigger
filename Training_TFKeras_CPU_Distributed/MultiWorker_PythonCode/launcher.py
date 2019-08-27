@@ -6,7 +6,7 @@
 # Limitations: this script currently only parallelizes training on a single node.
 #              TODO: extend to run parallel training on multiple nodes.
 # 
-# tested with tf 2.0.0-beta1
+# tested with tf 2.0.0-rc0
 ########
 
 import os
@@ -16,7 +16,7 @@ from subprocess import Popen
 #    - configure the list of endpoints, this defines the parallel degree for the training
 #    - define the name of the training script
 
-nodes_endpoints = "localhost:12345, localhost:12346, localhost:12347" # this will spawn 3 workers
+nodes_endpoints = "localhost:12345, localhost:12346, localhost:12347, localhost:12348" # will train with 4 workers 
 training_script_name="4.3a_InclusiveClassifier_WorkerCode.py"         # training script
 
 # This envirment variable is used as a way to pass the parameter to the training script
