@@ -54,15 +54,15 @@ Schema:
   - 162 MB: [testUndersampled_2kevents.parquet](http://sparkdltrigger.web.cern.ch/sparkdltrigger/testUndersampled_2kevents.parquet) Contains a sample of the test dataset with all the features, in Apache Parquet format, produced by the filtering and feature engineering steps
 
 - Full dataset in Apache Parquet format:
-  - 255 GB: [trainUndersampled_features.parquet](http://sparkdltrigger.web.cern.ch/sparkdltrigger/trainUndersampled_features.parquet)
-  - 64 GB:  [testUndersampled_features.parquet](http://sparkdltrigger.web.cern.ch/sparkdltrigger/testUndersampled_features.parquet)
+  - 255 GB: [trainUndersampled.parquet](http://sparkdltrigger.web.cern.ch/sparkdltrigger/trainUndersampled.parquet)
+  - 64 GB:  [testUndersampled.parquet](http://sparkdltrigger.web.cern.ch/sparkdltrigger/testUndersampled.parquet)
 
 - Dataset in TFRecord format 
   - Note, this dataset is derived by the full datasets in Parquet.
     It contains the same number of rows as the Parquet dataset, but only 3 fields, as needed 
     by the Inclusive classifier with Tensorflow: HLF_input, GRU_input and encoded_labels.
-  - 195 GB: [trainUndersampled_HLF_features.tfrecord](http://sparkdltrigger.web.cern.ch/sparkdltrigger/trainUndersampled_features.tfrecord)
-  - 49 GB:  [testUndersampled_HLF_features.tfrecord](http://sparkdltrigger.web.cern.ch/sparkdltrigger/testUndersampled_features.tfrecord)
+  - 195 GB: [trainUndersampled.tfrecord](http://sparkdltrigger.web.cern.ch/sparkdltrigger/trainUndersampled.tfrecord)
+  - 49 GB:  [testUndersampled.tfrecord](http://sparkdltrigger.web.cern.ch/sparkdltrigger/testUndersampled.tfrecord)
 
 
 ## Raw data - SAMPLE
