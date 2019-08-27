@@ -1,18 +1,22 @@
 # SparkDLTrigger
 
-This repository contains the code and notebooks accompanying the blog article [Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl).  
-Principal author of the notebooks: Matteo.Migliorini@cern.ch  
-Contacts: Luca.Canali@cern.ch; Matteo.Migliorini@cern.ch; Riccardo.Castellotti@cern.ch  
-Acknowledgements: Viktor Khristenko, Maria Girone, Maurizio Pierini, Thong Nhuyen, Members of the Hadoop and Spark service at CERN  
-Intel for BigDL and Analytics Zoo consultancy: Jiao (Jennie) Wang and Sajan Govindan  
+This repository contains the code and notebooks accompanying the blog article
+[Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl).    
 
+Principal author of the notebooks: Matteo.Migliorini@cern.ch  
+Further work and contacts: Luca.Canali@cern.ch; Riccardo.Castellotti@cern.ch; Matteo.Migliorini@cern.ch    
+Raw data and neural network models: [T.Q. Nguyen *et al.*](https://arxiv.org/abs/1807.00083)   
+Acknowledgements: Viktor Khristenko, Maurizio Pierini, Thong Nguyen, Marco Zanetti, Maria Girone,
+members of the Hadoop and Spark service at CERN,
+Intel for BigDL and Analytics Zoo consultancy: Jiao (Jennie) Wang and Sajan Govindan  
   
 ### Physics use case
 Event data flows collected from the particle detector (CMS experiment) contains different types
 of event topologies of interest. 
 A particle classifier built with neural networks can be used as event filter,
 improving state of the art in accuracy.  
-This work reproduces the findings of the paper [Topology classification with deep learning to improve real-time event selection at the LHC](https://arxiv.org/abs/1807.00083)
+This work reproduces the findings of the paper
+[Topology classification with deep learning to improve real-time event selection at the LHC](https://arxiv.org/abs/1807.00083)
 using tools from the Big Data ecosystem, notably Apache Spark and BigDL/Analytics Zoo.
 
 ![Physics use case for the particle classifier](Docs/Physics_use_case.png)
@@ -29,10 +33,12 @@ The four steps of the pipeline we built are:
 
 ![Machine learning data pipeline](Docs/DataPipeline.png)
   
- 
 ### Results
-The resutls of the DL model(s) training are satisfactoy and match the resutls of the original research paper. 
+The results of the DL model(s) training are satisfactoy and match the results of the original research paper. 
 ![Loss converging, ROC and AUC](Docs/Loss_ROC_AUC.png)
+
+### Open data and code
+Data and code to reproduce this work are made available via this repository.
 
 ### Additional info
 - [Blog post "Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo"](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl)
