@@ -6,7 +6,7 @@ This repository contains the code and notebooks accompanying the blog article
 Principal author of the notebooks: Matteo.Migliorini@cern.ch  
 Further work and contacts: Luca.Canali@cern.ch; Riccardo.Castellotti@cern.ch; Matteo.Migliorini@cern.ch    
 Raw data and neural network models: [T.Q. Nguyen *et al.*](https://arxiv.org/abs/1807.00083)   
-Acknowledgements: Viktor Khristenko, Riccardo Castellotti, Maria Girone, Thong Nguyen, Maurizio Pierini, Marco Zanetti,
+Acknowledgements: Viktor Khristenko, Thong Nguyen, Maurizio Pierini, Maria Girone, Marco Zanetti, 
 members of the Hadoop and Spark service at CERN,
 Intel team for BigDL and Analytics Zoo consultancy: Jiao (Jennie) Wang and Sajan Govindan,  
   
