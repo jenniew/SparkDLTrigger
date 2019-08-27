@@ -1,14 +1,15 @@
 # Data
 
 This directory contains links to download datased used by this project, with a short description.  
-The focus is on providing the full data sets for neural network training.
-For the largest datasets (raw data and the output of first step of pre-processing) we currently have uploaded
+For the largest datasets (raw data and the output of first step of pre-processing) we have currently uploaded
 only representative samples. 
-The full dataset is expected to be made available from CERN Open Data at a later date.
+The full dataset is expected to be made available using CERN Open Data at a later date.
 Data are made available under the terms of the CC0 waiver.  
-Credits for the original dataset (rawData) to [T.Q.Nguyen *et al.*](https://arxiv.org/abs/1807.0008).
-Datasets in Apache Parquet and TFRecord format have been produced using the notebooks published in this repository. 
-If you have access to CERN computing resources, you can contact the Hadoop and Spark service admins to get more information on how you can run this pipeline with the full input dataset.
+Credits: for the original dataset (rawData) to [T.Q.Nguyen *et al.*](https://arxiv.org/abs/1807.0008).
+Datasets in Apache Parquet and TFRecord format have been produced using the notebooks published in this repository.  
+Note: If you have access to CERN computing resources, you can contact the authors to get
+more information on where to find the full dataset, which is available both on the Hadoop platform and on
+CERN EOS storage.
 
 ## HLF features 
 This is the simplest model. It contains an array of 14 "High Level Features" (HLF). The classifier has 3 output classes, labeled from 0 to 1.
@@ -73,4 +74,12 @@ Only a sample of the raw data is provided at present. The full dataset used by t
 Only a sample of the data is provided currently, The full datataset occupies 943 GB.
 - 6.4 GB [dataIngestion_full_13TeV_SAMPLE](http://sparkdltrigger.web.cern.ch/sparkdltrigger/dataIngestion_full_13TeV_SAMPLE)
 
+## How to bulk download using wget
+This technique can be used to download full diractories (tested on Linux):
+```
+DATASET_NAME="testUndersampled_HLF_features.parquet"
+wget -r -np -R "index.html*" -e robots=off http://sparkdltrigger.web.cern.ch/sparkdltrigger/$DATASET_NAME
 
+DATASET_NAME="trainUndersampled_HLF_features.parquet"
+wget -r -np -R "index.html*" -e robots=off http://sparkdltrigger.web.cern.ch/sparkdltrigger/$DATASET_NAME
+```
