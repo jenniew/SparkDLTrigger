@@ -10,7 +10,7 @@ Acknowledgements: Viktor Khristenko, Maurizio Pierini, Thong Nguyen, Marco Zanet
 members of the Hadoop and Spark service at CERN,
 Intel for BigDL and Analytics Zoo consultancy: Jiao (Jennie) Wang and Sajan Govindan  
   
-### Physics use case
+## Physics use case
 Event data flows collected from the particle detector (CMS experiment) contains different types
 of event topologies of interest. 
 A particle classifier built with neural networks can be used as event filter,
@@ -22,7 +22,7 @@ using tools from the Big Data ecosystem, notably Apache Spark and BigDL/Analytic
 ![Physics use case for the particle classifier](Docs/Physics_use_case.png)
   
   
-### Data pipeline
+## Data pipelines for deeplearning
 Data pipelines are of paramount importance to make machine learning projects successful, by integrating multiple components and APIs used for data processing across the entire data chain. A good data pipeline implementation can accelerate and improve the productivity of the work around the core machine learning tasks.
 The four steps of the pipeline we built are:
 
@@ -33,14 +33,24 @@ The four steps of the pipeline we built are:
 
 ![Machine learning data pipeline](Docs/DataPipeline.png)
   
-### Results
+## Results
 The results of the DL model(s) training are satisfactoy and match the results of the original research paper. 
 ![Loss converging, ROC and AUC](Docs/Loss_ROC_AUC.png)
 
-### Open data and code
+## Data and code
 Data and code to reproduce this work are made available via this repository.
+- [Links to download the datasets](Data), with a short description
+- Notebooks with [data preparation code using Apache Spark](DataIngestion_FeaturePreparation)
+- Notebooks with machine learning training
+  - Distributed DL training with [Apache Spark and BigDL/AnalyticsZoo](Training_BigDL_Zoo)
+  - Training DL models with TensorFlow (tf.keras):
+    - [tf.keras on CPU](Training_TFKeras_CPU), multiple methods
+    - [Distributed Tensorflow on CPU](Training_TFKeras_CPU_Distributed), with tf.keras with tf.distributed
+    - [tf.keras with GPU](Training_TFKeras_GPU)
+    - [Saved models](Models)
+  - Notebooks for [training with Spark ML](Training_Other_ML)  
 
-### Additional info
+## Additional info and references
 - [Blog post "Machine Learning Pipelines for High Energy Physics Using Apache Spark with BigDL and Analytics Zoo"](https://db-blog.web.cern.ch/blog/luca-canali/machine-learning-pipelines-high-energy-physics-using-apache-spark-bigdl)
 - [Poster at the CERN openlab technical workshop 2019](Docs/Poster.pdf)  
 - [Presentation at Spark Summit SF 2019](https://databricks.com/session/deep-learning-on-apache-spark-at-cerns-large-hadron-collider-with-intel-technologies)  
