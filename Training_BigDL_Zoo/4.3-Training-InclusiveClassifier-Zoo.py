@@ -47,31 +47,12 @@
 
 # In[1]:
 
-# Check if Spark Session has been created correctly
-spark
 
 
 # ## Load train and test dataset
 
 # In[2]:
 
-PATH = "file:///data/cern/cern-small/"
-
-trainDF = spark.read.format('parquet')        .load(PATH + 'trainUndersampled.parquet')        .select(['GRU_input', 'HLF_input', 'encoded_label'])
-        
-testDF = spark.read.format('parquet')        .load(PATH + 'testUndersampled.parquet')        .select(['GRU_input', 'HLF_input', 'encoded_label'])
-
-
-# In[3]:
-
-trainDF.printSchema()
-
-
-# In[4]:
-
-print("Number of events in the test dataset:", testDF.count())
-
-print("Number of events in the training dataset:", trainDF.count())
 
 
 # ## Create the model
@@ -80,8 +61,29 @@ print("Number of events in the training dataset:", trainDF.count())
 
 # Init analytics zoo
 from zoo.common.nncontext import *
-sc = init_nncontext("Inclusive Classifier")
+from pyspark.sql import SQLContext
 
+sc = init_nncontext("inclusive classifier")
+
+sql_context = SQLContext(sc)
+
+PATH = "file:///data/cern/cern-small/"
+
+trainDF = sql_context.read.format('parquet').load(PATH + 'trainUndersampled.parquet').select(
+    ['GRU_input', 'HLF_input', 'encoded_label'])
+
+testDF = sql_context.read.format('parquet').load(PATH + 'testUndersampled.parquet').select(
+    ['GRU_input', 'HLF_input', 'encoded_label'])
+
+# In[3]:
+
+trainDF.printSchema()
+
+# In[4]:
+
+print("Number of events in the test dataset:", testDF.count())
+
+print("Number of events in the training dataset:", trainDF.count())
 
 # In[6]:
 
@@ -92,19 +94,24 @@ from zoo.pipeline.api.keras.layers.recurrent import GRU
 from zoo.pipeline.api.keras.engine.topology import Merge
 
 ## GRU branch
-gruBranch = Sequential()             .add(Masking(0.0, input_shape=(801, 19)))             .add(GRU(
-                output_dim=50,
-                activation='tanh'
-            )) \
-            .add(Dropout(0.2)) \
+gruBranch = Sequential()\
+    .add(Masking(0.0, input_shape=(801, 19)))\
+    .add(GRU(output_dim=50,
+             activation='tanh'
+    ))\
+    .add(Dropout(0.2))
+
 ## HLF branch
-hlfBranch = Sequential()             .add(Dropout(0.2, input_shape=(14,)))
+hlfBranch = Sequential().add(Dropout(0.2, input_shape=(14,)))
 
 ## Concatenate the branches
 branches = Merge(layers=[gruBranch, hlfBranch], mode='concat')
 
 ## Create the model
-model = Sequential()         .add(branches)         .add(Dense(25, activation='relu'))         .add(Dense(3, activation='softmax'))
+model = Sequential()\
+    .add(branches)\
+    .add(Dense(25, activation='relu'))\
+    .add(Dense(3, activation='softmax'))
 
 
 # ## Create train and validation RDD
@@ -199,29 +206,29 @@ model.set_tensorboard(logDir, appName)
 
 # In[ ]:
 
-get_ipython().magic(u'time model.fit(x=trainRDD, batch_size=BDLbatch, nb_epoch=numEpochs, validation_data=testRDD, distributed=True)')
-
+# get_ipython().magic(u'time model.fit(x=trainRDD, batch_size=BDLbatch, nb_epoch=numEpochs, validation_data=testRDD, distributed=True)')
+#
 
 # ## Plot loss
 
 # In[16]:
 
-get_ipython().magic(u'matplotlib notebook')
-import matplotlib.pyplot as plt
-plt.style.use('seaborn-darkgrid')
+# get_ipython().magic(u'matplotlib notebook')
+# import matplotlib.pyplot as plt
+# plt.style.use('seaborn-darkgrid')
 
 trainSummary = TrainSummary(log_dir=logDir,app_name=appName)
 loss = np.array(trainSummary.read_scalar("Loss"))
 valSummary = ValidationSummary(log_dir=logDir,app_name=appName)
 val_loss = np.array(valSummary.read_scalar("Loss"))
 
-plt.plot(loss[:,0], loss[:,1], label="Training loss")
-plt.plot(val_loss[:,0], val_loss[:,1], label="Validation loss", color='crimson', alpha=0.8)
-plt.xlabel('Iteration')
-plt.ylabel('Loss')
-plt.legend()
-plt.title("Inclusive classifier loss")
-plt.show()
+# plt.plot(loss[:,0], loss[:,1], label="Training loss")
+# plt.plot(val_loss[:,0], val_loss[:,1], label="Validation loss", color='crimson', alpha=0.8)
+# plt.xlabel('Iteration')
+# plt.ylabel('Loss')
+# plt.legend()
+# plt.title("Inclusive classifier loss")
+# plt.show()
 
 
 # ## Save the model
@@ -251,7 +258,7 @@ pred = model.predict(testRDD)
 # In[19]:
 
 y_pred = np.asarray(pred.collect())
-y_true = np.asarray(testDF.select('encoded_label').rdd                    .map(lambda row: np.asarray(row.encoded_label)).collect())
+y_true = np.asarray(testDF.select('encoded_label').rdd.map(lambda row: np.asarray(row.encoded_label)).collect())
 
 
 # In[20]:
@@ -268,17 +275,17 @@ for i in range(3):
 
 # In[21]:
 
-plt.figure()
-plt.plot(fpr[0], tpr[0], lw=2, 
-         label='Inclusive classifier (AUC) = %0.4f' % roc_auc[0])
-plt.plot([0, 1], [0, 1], linestyle='--')
-plt.xlim([0.0, 1.0])
-plt.ylim([0.0, 1.05])
-plt.xlabel('Background Contamination (FPR)')
-plt.ylabel('Signal Efficiency (TPR)')
-plt.title('$tt$ selector')
-plt.legend(loc="lower right")
-plt.show()
+# plt.figure()
+# plt.plot(fpr[0], tpr[0], lw=2,
+#          label='Inclusive classifier (AUC) = %0.4f' % roc_auc[0])
+# plt.plot([0, 1], [0, 1], linestyle='--')
+# plt.xlim([0.0, 1.0])
+# plt.ylim([0.0, 1.05])
+# plt.xlabel('Background Contamination (FPR)')
+# plt.ylabel('Signal Efficiency (TPR)')
+# plt.title('$tt$ selector')
+# plt.legend(loc="lower right")
+# plt.show()
 
 
 # ## Confusion Matrix
@@ -303,19 +310,19 @@ cm = confusion_matrix(np.argmax(y_true, axis=1), np.argmax(y_pred, axis=1), labe
 ## Normalize CM
 cm = cm / cm.astype(np.float).sum(axis=1)
 
-fig, ax = plt.subplots()
-ax = sns.heatmap(cm, annot=True, fmt='g')
-ax.xaxis.set_ticklabels(labels_name)
-ax.yaxis.set_ticklabels(labels_name)
-plt.title('Confusion matrix - Inclusive classifier')
-plt.xlabel('True labels')
-plt.ylabel('Predicted labels')
-plt.show()
+# fig, ax = plt.subplots()
+# ax = sns.heatmap(cm, annot=True, fmt='g')
+# ax.xaxis.set_ticklabels(labels_name)
+# ax.yaxis.set_ticklabels(labels_name)
+# plt.title('Confusion matrix - Inclusive classifier')
+# plt.xlabel('True labels')
+# plt.ylabel('Predicted labels')
+# plt.show()
 
 
 # In[24]:
 
-spark.stop()
+sc.stop()
 
 
 # In[ ]:
